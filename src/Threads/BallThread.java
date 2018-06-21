@@ -78,7 +78,12 @@ public class BallThread extends Thread{
             else{
                 if(ball.getLayoutX()+(velocityX*time)<0){
                     ball.setLayoutX(0);
-                }else{
+                }
+                if(ball.getLayoutX()+(velocityX*time)>scene.getWidth()){
+                ball.setLayoutX(scene.getHeight());
+                }
+                
+                else{
                 ball.setLayoutX(ball.getLayoutX()+(velocityX*time));
                 }
                 
