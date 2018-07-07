@@ -7,44 +7,55 @@ Jugador
  */
 package Modelo;
 
+import java.util.logging.Logger;
+
 /**
  *
  * @author MMont
  */
 public class Jugador {
-    private String firstName;
-    private String lastName;
-    private int edad;
+    private int idJugador;
+    private String name;
+    private int puntos;
 
-    public Jugador(String firstName, String lastName, int edad) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.edad = edad;
+    public Jugador() {
     }
 
-    public String getFirstName() {
-        return firstName;
+    public Jugador(int idJugador, String name, int puntos) {
+        this.idJugador = idJugador;
+        this.name = name;
+        this.puntos = puntos;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public int getIdJugador() {
+        return idJugador;
     }
 
-    public String getLastName() {
-        return lastName;
+    public void setIdJugador(int idJugador) {
+        this.idJugador = idJugador;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public String getName() {
+        return name;
     }
 
-    public int getEdad() {
-        return edad;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public void setEdad(int edad) {
-        this.edad = edad;
+    public int getPuntos() {
+        return puntos;
     }
+
+    public void setPuntos(int puntos) {
+        this.puntos = puntos;
+    }
+
+   
+    
+    
+
+    
     
     
 }

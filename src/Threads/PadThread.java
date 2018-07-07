@@ -19,12 +19,15 @@ import javafx.scene.input.KeyEvent;
  */
 public class PadThread extends Thread{
     Label leftPad=null;
+    Label rightPad=null;
     Scene scene=null;
     public static boolean hitLeft=false;
+    public static boolean hitRight=false;
 
-    public PadThread(Label left,Scene scene) {
+    public PadThread(Label left,Scene scene, Label right) {
         this.leftPad=left;
         this.scene=scene;
+        this.rightPad=right;
         
     }
     
@@ -32,12 +35,11 @@ public class PadThread extends Thread{
     public void run(){
         
         while(true){
+            
             if(hitLeft==true){
-                System.out.println("hitleft es true");
 
                 for (int i =1;i<4;i++){
                     leftPad.setRotate(-22.5*i);
-                    System.out.println("Subi 22.5"+ i);
                     try {
                         sleep(75);
                     } catch (InterruptedException ex) {
@@ -46,7 +48,6 @@ public class PadThread extends Thread{
                 }
                 
                 for (int i =1;i<4;i++){
-                    System.out.println("baje 22.5" + i);
                     leftPad.setRotate(-90+22.5*i);
                     try {
                         sleep(75);
@@ -55,12 +56,39 @@ public class PadThread extends Thread{
                     }
 
                 }
-
                 hitLeft=false;
                 
             }
+            else if(hitRight == true){
+                 for (int i =1;i<4;i++){
+                    rightPad.setRotate(22.5*i);
+                    try {
+                        sleep(75);
+                    } catch (InterruptedException ex) {
+                        Logger.getLogger(PadThread.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+                
+                for (int i =1;i<4;i++){
+                    rightPad.setRotate(90-22.5*i);
+                    try {
+                        sleep(75);
+                    } catch (InterruptedException ex) {
+                        Logger.getLogger(PadThread.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+
+                }
+                hitRight=false;
+                
+            }
             
+            try {
+                sleep(50);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(PadThread.class.getName()).log(Level.SEVERE, null, ex);
+            }
             
+        
         }
     }
     

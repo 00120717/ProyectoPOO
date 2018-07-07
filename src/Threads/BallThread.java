@@ -23,12 +23,12 @@ public class BallThread extends Thread{
     Scene scene;
     boolean hitSpace=false;
     
-    double time= 0.0;
+    static double time= 0.0;
     double gravity= 15;
-    double velocityY=0;
+    static  double velocityY=0;
     double inicialPosY=0;
 
-    double velocityX=50;
+    static double velocityX=50;
     
     public BallThread(Label ball, Scene scene) {
         this.ball=ball;
@@ -47,6 +47,10 @@ public class BallThread extends Thread{
                             PadThread.hitLeft=true;  
                             System.out.println("Presiono a");
                         }
+                        if(event.getCode()==KeyCode.S){
+                            PadThread.hitRight=true;  
+                            System.out.println("Presiono s");
+                        }
                     }
                     
                  });
@@ -55,6 +59,7 @@ public class BallThread extends Thread{
     @Override
     public void run(){
         while(true){
+
             if(ball.getLayoutX()<=0){
                 velocityX= velocityX*-1;
                 
@@ -79,8 +84,8 @@ public class BallThread extends Thread{
                 if(ball.getLayoutX()+(velocityX*time)<0){
                     ball.setLayoutX(0);
                 }
-                if(ball.getLayoutX()+(velocityX*time)>scene.getWidth()){
-                ball.setLayoutX(scene.getHeight());
+                if(ball.getLayoutX()+(velocityX*time)>scene.getWidth()-ball.getWidth()){
+                ball.setLayoutX(scene.getHeight()-ball.getWidth());
                 }
                 
                 else{
