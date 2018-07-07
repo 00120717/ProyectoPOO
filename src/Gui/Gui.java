@@ -7,6 +7,7 @@ package Gui;
 
 import Dao.JugadorDao;
 import Modelo.Jugador;
+import Threads.BallPadThread;
 import Threads.BallThread;
 import Threads.PadThread;
 import java.util.ArrayList;
@@ -27,6 +28,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 /**
  *
@@ -76,6 +78,14 @@ public class Gui extends Application {
         
         primaryStage.setTitle("Ventana Principal");
         primaryStage.setScene(scene);
+        
+        primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+        @Override
+        public void handle(WindowEvent t) {
+           // Platform.exit();
+            System.exit(0);
+    }
+});
         primaryStage.show();
 
     }
@@ -95,7 +105,7 @@ public class Gui extends Application {
                 newStage.setScene(scene2);
                 
                 Label label1 = new Label();
-                label1.setLayoutX(200);
+                label1.setLayoutX(265);
                 label1.setLayoutY(300);
                 
                 Image image = new Image(getClass().getResourceAsStream("ball.png"));
@@ -105,6 +115,7 @@ public class Gui extends Application {
                 label1.setGraphic(imageView);
                 
                 Label label2 = new Label();
+                Label label3 = new Label();
                
                 
                 Image leftPad = new Image(getClass().getResourceAsStream("Pad Left.png"));
@@ -112,18 +123,29 @@ public class Gui extends Application {
                 imageView2.setFitHeight(75);
                 imageView2.setFitWidth(100);
                 label2.setGraphic(imageView2);
-                label2.setLayoutX(150);
+                label2.setLayoutX(125);
                 label2.setLayoutY(500);
+                
+                Image leftPad2 = new Image(getClass().getResourceAsStream("Pad Right.png"));
+                ImageView imageView3 = new ImageView(leftPad2);
+                imageView3.setFitHeight(75);
+                imageView3.setFitWidth(100);
+                label3.setGraphic(imageView3);
+                label3.setLayoutX(375);
+                label3.setLayoutY(500);
                 
                 BallThread ballChecker = new BallThread(label1,scene2);
                 ballChecker.start();
                 
                 
-                PadThread padChecker = new PadThread(label2,scene2);
+                PadThread padChecker = new PadThread(label2,scene2,label3);
                 padChecker.start();
                 
+                BallPadThread padBallChecker = new BallPadThread(label1,label2,scene2);
+                padBallChecker.start();
+                
                
-                grid2.getChildren().addAll(label1,label2);
+                grid2.getChildren().addAll(label1,label2,label3);
 
                 newStage.show();
 
